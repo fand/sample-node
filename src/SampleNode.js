@@ -53,7 +53,7 @@ class SampleNode extends AltAudioNode {
     this._out.disconnect(...args);
   }
 
-  dispose() {
+  dispose () {
     this._out.disconnect();
     this._out = null;
   }
