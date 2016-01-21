@@ -29,7 +29,8 @@
   ],
   "homepage": "https://github.com/fand/sample-node",
   "keywords": [
-    "Web Audio API"
+    "Web Audio API",
+    "altnode"
   ],
   "license": "MIT",
   "main": "index.js",
