@@ -27,11 +27,11 @@ class SampleNode extends AltAudioNode {
     return this._out.gain;
   }
 
-  noteOn () {
+  play (time = 0) {
     if (!this._buffer) { return; }
 
     if (this._node) {
-      this._node.stop(0);
+      this._node.stop(Math.max(time - 0.01, 0));
     }
 
     const node = this._ctx.createBufferSource();
@@ -40,7 +40,7 @@ class SampleNode extends AltAudioNode {
     node.playbackRate.value = this.playbackRate;
 
     node.connect(this._out);
-    node.start(0);
+    node.start(time);
 
     this._node = node;
   }
