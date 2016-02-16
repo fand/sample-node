@@ -1,7 +1,7 @@
 {
   "name": "@fand/sample-node",
   "description": "An easy sampler AudioNode",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "fand",
   "bugs": {
     "url": "https://github.com/fand/sample-node/issues"
