@@ -1,0 +1,25 @@
+{
+  "name": "@fand/sample-node-example",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify index.js -o bundle.js -t babelify",
+    "watch": "watchify index.js -o bundle.js -t babelify",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "link": "cd .. && npm link && cd example && npm link @fand/sample-node",
+    "serve": "budo -o",
+    "start": "npm-run-all -p watch serve"
+  },
+  "author": "fand",
+  "license": "MIT",
+  "devDependencies": {
+    "@fand/sample-node": "*",
+    "babel-preset-es2015": "^6.5.0",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "budo": "^8.0.4",
+    "npm-run-all": "^1.5.1",
+    "watchify": "^3.7.0"
+  }
+}

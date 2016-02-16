@@ -1,11 +1,15 @@
-// To build, run `browserify example/index.js -o example/bundle.js`
-const SampleNode = require('../lib/SampleNode');
+const SampleNode = require('@fand/sample-node');
 
-const ctx = new AudioContext();
-const sampleNode = new SampleNode(ctx, './kick.wav');
-sampleNode.connect(ctx.destination);
+const ctx     = new AudioContext();
+const wavNode = new SampleNode(ctx, './kick.wav');
+const mp3Node = new SampleNode(ctx, './kick.mp3');
+wavNode.connect(ctx.destination);
+mp3Node.connect(ctx.destination);
 
-const button = document.querySelector('button');
-button.addEventListener('click', () => {
-  sampleNode.play();
+document.querySelector('.wav').addEventListener('click', () => {
+  wavNode.start(0);
+});
+
+document.querySelector('.mp3').addEventListener('click', () => {
+  mp3Node.start(0);
 });
