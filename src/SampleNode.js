@@ -6,19 +6,22 @@ class SampleNode extends AltAudioNode {
   /**
    * @param {AudioContext} ctx
    * @param {string}       url
+   * @param {boolean}      isMonophonic
    */
-  constructor (ctx, url) {
+  constructor (ctx, url, isMonophonic = false) {
     super(ctx);
 
     this._ctx = ctx;
 
     this.playbackRate = 1.0;
+    this.isMonophonic = isMonophonic;
 
     loadAudio(this._ctx, url).then((buffer) => {
       this._buffer = buffer;
     });
 
-    this._node = null;
+    this._nodes = [];
+
     this._in   = this._ctx.createGain();
     this._out  = this._ctx.createGain();
   }
@@ -30,8 +33,8 @@ class SampleNode extends AltAudioNode {
   start (time = 0) {
     if (!this._buffer) { return; }
 
-    if (this._node) {
-      this._node.stop(Math.max(time - 0.01, 0));
+    if (this.isMonophonic) {
+      this.stop(Math.max(time - 0.001, 0));
     }
 
     const node = this._ctx.createBufferSource();
@@ -42,13 +45,12 @@ class SampleNode extends AltAudioNode {
     node.connect(this._out);
     node.start(time);
 
-    this._node = node;
+    this._nodes.push(node);
   }
 
   stop (time = 0) {
-    if (this._node) {
-      this._node.stop(time);
-    }
+    this._nodes.forEach(n => n.stop(time));
+    setTimeout(() => this._nodes = [], 0, time);
   }
 
   connect (...args) {
