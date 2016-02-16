@@ -27,7 +27,7 @@ class SampleNode extends AltAudioNode {
     return this._out.gain;
   }
 
-  play (time = 0) {
+  start (time = 0) {
     if (!this._buffer) { return; }
 
     if (this._node) {
@@ -43,6 +43,12 @@ class SampleNode extends AltAudioNode {
     node.start(time);
 
     this._node = node;
+  }
+
+  stop (time = 0) {
+    if (this._node) {
+      this._node.stop(time);
+    }
   }
 
   connect (...args) {
